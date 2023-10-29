@@ -10,7 +10,12 @@
     "format": "prettier --write src/"
   },
   "dependencies": {
+    "@element-plus/icons-vue": "^2.1.0",
+    "axios": "^1.6.0",
+    "echarts": "^5.4.3",
+    "element-plus": "^2.4.1",
     "vue": "^3.3.4",
+    "vue-echarts": "^6.6.1",
     "vue-router": "^4.2.5"
   },
   "devDependencies": {
