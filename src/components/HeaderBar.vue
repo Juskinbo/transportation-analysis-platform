@@ -15,16 +15,16 @@ import ButtonComponent from './ButtonComponent.vue';
 <template>
   <div class="header-bar">
     <div class="weather">
-      <LocationFilled style="height: 25%; color: #3594db; margin-right: 5px;" />
-      <span style="font-weight: bold; margin-right: 20px;">杭州市</span>
-      <PartlyCloudy style="height: 25%; margin-right: 5px;" />
-      <span style="margin-right: 10px;">多云</span>
+      <LocationFilled style="height: 30px; color: #3594db; margin-right: 5px;" />
+      <span style="font-weight: bold; margin-right: 20px; white-space: nowrap;">杭州市</span>
+      <PartlyCloudy style="height: 30px; margin-right: 5px;" />
+      <span style="margin-right: 10px; white-space: nowrap;">多云</span>
       <span>25℃~29℃</span>
     </div>
     <div class="title">
-      <ButtonComponent position="left-button" text="路段热力图" link="null" style="height: 50%;" />
+      <ButtonComponent position="left-button" text="路段热力图" link="null" style="height: 40%;" />
       <div class="main-title"><span class="main-title-text">智慧交通大数据分析平台</span></div>
-      <ButtonComponent position="right-button" text="路段分析" link="null" style="height: 50%;" />
+      <ButtonComponent position="right-button" text="路段分析" link="null" style="height: 40%;" />
     </div>
     <div class="account-info">
       <el-avatar :size="50" style="margin: 10px;" />
@@ -58,11 +58,14 @@ import ButtonComponent from './ButtonComponent.vue';
 }
 
 .main-title {
-  background: linear-gradient(to bottom, #082037, #2fb2e9);
+  background: url('@/assets/header-img.svg');
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
   height: 100%;
   /* margin-left: 50px; */
-  padding-left: 50px;
-  padding-right: 50px;
+  padding-left: 60px;
+  padding-right: 60px;
   /* margin-right: 50px; */
   display: flex;
   align-items: center;

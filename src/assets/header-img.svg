@@ -1,0 +1,43 @@
+<svg width="705.000000" height="113.097656" viewBox="0 0 705 113.098" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+	<desc>
+			Created with Pixso.
+	</desc>
+	<defs>
+		<linearGradient id="paint_linear_2_9_0" x1="352.499969" y1="0.000000" x2="352.499969" y2="90.000000" gradientUnits="userSpaceOnUse">
+			<stop stop-color="#081F36"/>
+			<stop offset="1.000000" stop-color="#2FB2EA"/>
+		</linearGradient>
+		<linearGradient id="paint_linear_2_10_0" x1="689.580322" y1="61.844246" x2="632.182861" y2="61.844246" gradientUnits="userSpaceOnUse">
+			<stop stop-color="#142A3F"/>
+			<stop offset="1.000000" stop-color="#0CA5DE"/>
+		</linearGradient>
+		<linearGradient id="paint_linear_2_11_0" x1="15.419925" y1="61.844238" x2="72.817383" y2="61.844238" gradientUnits="userSpaceOnUse">
+			<stop stop-color="#142A3F"/>
+			<stop offset="1.000000" stop-color="#0CA5DE"/>
+		</linearGradient>
+		<linearGradient id="paint_linear_2_13_0" x1="300.000000" y1="106.500000" x2="204.000000" y2="106.500000" gradientUnits="userSpaceOnUse">
+			<stop stop-color="#11CCF6"/>
+			<stop offset="1.000000" stop-color="#09667B"/>
+		</linearGradient>
+		<linearGradient id="paint_linear_2_14_0" x1="406.000000" y1="106.500000" x2="502.000000" y2="106.500000" gradientUnits="userSpaceOnUse">
+			<stop stop-color="#11CCF6"/>
+			<stop offset="1.000000" stop-color="#09667B"/>
+		</linearGradient>
+		<linearGradient id="paint_linear_2_15_0" x1="183.256409" y1="106.499969" x2="115.154633" y2="106.499969" gradientUnits="userSpaceOnUse">
+			<stop stop-color="#0C687E"/>
+			<stop offset="1.000000" stop-color="#1E2F3F"/>
+		</linearGradient>
+		<linearGradient id="paint_linear_2_16_0" x1="595.066528" y1="106.499985" x2="516.643555" y2="106.499985" gradientUnits="userSpaceOnUse">
+			<stop stop-color="#0C687E"/>
+			<stop offset="1.000000" stop-color="#1E2F3F"/>
+		</linearGradient>
+	</defs>
+	<path id="路径 204" d="M0 0L705 0L600 90L105 90L0 0Z" fill-rule="nonzero" fill="url(#paint_linear_2_9_0)"/>
+	<path id="路径 205" d="M646 49L705 49L675.565 74.6885L616.565 74.6885L646 49Z" fill-rule="nonzero" fill="url(#paint_linear_2_10_0)"/>
+	<path id="路径 206" d="M59 49L0 49L29.4346 74.6885L88.4346 74.6885L59 49Z" fill-rule="nonzero" fill="url(#paint_linear_2_11_0)"/>
+	<rect id="矩形 284" x="305.000000" y="102.000000" width="96.000000" height="9.000000" fill="#11CCF6"/>
+	<rect id="矩形 283" x="204.000000" y="102.000000" width="96.000000" height="9.000000" fill="url(#paint_linear_2_13_0)"/>
+	<rect id="矩形 285" x="406.000000" y="102.000000" width="96.000000" height="9.000000" fill="url(#paint_linear_2_14_0)"/>
+	<path id="减去 33" d="M166.157 99.9023L147.381 99.9023L141.78 113.098L160.556 113.098L166.157 99.9023ZM164.785 113.098L182.432 113.098L187.857 99.9023L170.386 99.9023L164.785 113.098ZM114.86 99.9023L143.151 99.9023L137.55 113.098L109.435 113.098L114.86 99.9023Z" clip-rule="evenodd" fill-rule="evenodd" fill="url(#paint_linear_2_15_0)" fill-opacity="1.000000"/>
+	<path id="减去 34" d="M543.946 113.098L562.722 113.098L557.121 99.9023L538.345 99.9023L543.946 113.098ZM534.115 99.9023L516.644 99.9023L522.069 113.098L539.716 113.098L534.115 99.9023ZM595.066 113.098L566.951 113.098L561.35 99.9023L589.641 99.9023L595.066 113.098Z" clip-rule="evenodd" fill-rule="evenodd" fill="url(#paint_linear_2_16_0)" fill-opacity="1.000000"/>
+</svg>
