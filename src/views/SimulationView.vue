@@ -5,7 +5,6 @@ onMounted(() => {
   map.centerAndZoom(new BMap.Point(120.171387, 30.249298), 13);
   var traffic = new BMap.TrafficLayer();        // 创建交通流量图层实例      
   map.addTileLayer(traffic);                    // 将图层添加到地图上
-
 });
 
 const option = ref({
@@ -58,6 +57,7 @@ const option = ref({
   grid: {
     top: '30%',
     right: 60,
+    bottom: '10%',
   }
 });
 
@@ -153,29 +153,36 @@ const schemeTitles = ref(["", "限行时段", "限行规则", "限行范围"])
           </div>
         </div>
         <div class="restriction-scheme">
-          <div style="background: linear-gradient(to bottom, #fc333d, #762528)">限行方案</div>
-          <div style="display: grid; font-size: 12px;">
-            <div style="display: grid; grid-template-columns: repeat(4, 1fr);">
+          <div style="background: linear-gradient(to bottom, #fc333d, #762528); width: 100%;">限行方案</div>
+          <div style="display: grid; font-size: 12px; width: 90%;">
+            <div style="display: grid; grid-template-columns: repeat(4, 1fr); margin: 10px 0;">
               <div v-for="o, index in schemeTitles" :key="index">{{ o }}</div>
             </div>
             <div style="display: grid; grid-template-columns: repeat(4, 1fr);">
-              <div>浙A号牌</div>
-              <div style="grid-column: span 3;">不变，限行时段、范围和规则都维持不变</div>
-              <div style="grid-row: span 2;">非浙A号牌</div>
-              <div>7:00-9:00<br>16:30-18:30</div>
-              <div style="grid-row: span 2;">全号段限行</div>
-              <div>绕城高速公路范围内的所有道路</div>
-              <div>7:00-9:00<br>16:30-18:30</div>
-              <div>绕城高速公路范围内的所有道路</div>
-              <div style="grid-row: span 3;">浙A区域号牌</div>
-              <div>7:00-9:00<br>16:30-18:30</div>
-              <div style="grid-row: span 2;">全号段限行</div>
-              <div>绕城高速公路范围内的所有道路</div>
-              <div>7:00-9:00<br>16:30-18:30</div>
-              <div>绕城高速公路范围内的所有道路</div>
-              <div>7:00-9:00<br>16:30-18:30</div>
-              <div>尾号限行</div>
-              <div>绕城高速公路范围内的所有道路</div>
+              <div style="margin: 5px 5px; display: flex; align-items: center;">浙A号牌</div>
+              <div style="grid-column: span 3; background-color: #2eb3e9; border-radius: 4px; margin: 5px 5px;">
+                不变，限行时段、范围和规则都维持不变</div>
+              <div style="grid-row: span 2; margin: 5px 5px; display: flex; align-items: center;">非浙A号牌</div>
+              <div style="background-color: #2eb3e9; border-radius: 4px; margin: 5px 5px;">7:00-9:00<br>16:30-18:30</div>
+              <div
+                style="grid-row: span 2; background-color: #2eb3e9; border-radius: 4px; margin: 5px 5px; display: flex; align-items: center; justify-content: center;">
+                全号段限行</div>
+              <div style="background-color: #2eb3e9; border-radius: 4px; margin: 5px 5px;">绕城高速公路范围内的所有道路</div>
+              <div style="background-color: #2eb3e9; border-radius: 4px; margin: 5px 5px;">7:00-9:00<br>16:30-18:30</div>
+              <div style="background-color: #2eb3e9; border-radius: 4px; margin: 5px 5px;">绕城高速公路范围内的所有道路</div>
+              <div style="grid-row: span 3; margin: 5px 5px; display: flex; align-items: center;">浙A区域号牌</div>
+              <div style="background-color: #2eb3e9; border-radius: 4px; margin: 5px 5px;">7:00-9:00<br>16:30-18:30</div>
+              <div
+                style="grid-row: span 2; background-color: #2eb3e9; border-radius: 4px; margin: 5px 5px; display: flex; align-items: center; justify-content: center;">
+                全号段限行</div>
+              <div style="background-color: #2eb3e9; border-radius: 4px; margin: 5px 5px;">绕城高速公路范围内的所有道路</div>
+              <div style="background-color: #2eb3e9; border-radius: 4px; margin: 5px 5px;">7:00-9:00<br>16:30-18:30</div>
+              <div style="background-color: #2eb3e9; border-radius: 4px; margin: 5px 5px;">绕城高速公路范围内的所有道路</div>
+              <div style="background-color: #2eb3e9; border-radius: 4px; margin: 5px 5px;">7:00-9:00<br>16:30-18:30</div>
+              <div
+                style="background-color: #2eb3e9; border-radius: 4px; margin: 5px 5px; display: flex; align-items: center; justify-content: center;">
+                尾号限行</div>
+              <div style="background-color: #2eb3e9; border-radius: 4px; margin: 5px 5px;">绕城高速公路范围内的所有道路</div>
             </div>
           </div>
         </div>
@@ -301,6 +308,7 @@ const schemeTitles = ref(["", "限行时段", "限行规则", "限行范围"])
   max-height: 50%;
   display: flex;
   flex-direction: column;
+  align-items: center;
 }
 
 .simulation-count {
@@ -344,7 +352,6 @@ const schemeTitles = ref(["", "限行时段", "限行规则", "限行范围"])
 .el-button+.el-button {
   margin-left: 0;
   margin: 10px 0;
-}
-</style>
+}</style>
 
 <style></style>
