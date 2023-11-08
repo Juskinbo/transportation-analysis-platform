@@ -1,9 +1,6 @@
 <script setup>
 import 'echarts/extension/bmap/bmap'
 import { ref, onMounted } from 'vue'
-import axios from 'axios'
-let ROOT_PATH = 'https://echarts.apache.org/examples'
-let points = []
 onMounted(() => {
 
 

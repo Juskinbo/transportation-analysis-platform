@@ -7,7 +7,6 @@ import HeaderBar from './components/HeaderBar.vue'
   <header>
     <HeaderBar />
   </header>
-
   <RouterView />
 </template>
 

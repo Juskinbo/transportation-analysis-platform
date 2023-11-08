@@ -10,6 +10,8 @@ import ButtonComponent from './ButtonComponent.vue';
 //     console.log(res.data);
 //   });
 // });
+
+
 </script>
 
 <template>
@@ -31,7 +33,6 @@ import ButtonComponent from './ButtonComponent.vue';
       <span>交通员张三</span>
       <a class="exit">退出</a>
     </div>
-
   </div>
 </template>
 
