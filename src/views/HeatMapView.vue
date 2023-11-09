@@ -62,50 +62,6 @@ onMounted(() => {
 // var bmap = myChart.getModel().getComponent('bmap').getBMap();
 // bmap.addControl(new BMap.MapTypeControl());
 
-
-
-
-
-
-
-
-const warning = [
-  {
-    id: 1,
-    title: '恶劣天气：泥石流',
-    content: '北侧交通路口',
-    time: '2023-10-12 16:25:32',
-  },
-  {
-    id: 2,
-    title: '重大事件：省人大召开',
-    content: '北侧交通路口',
-    time: '2023-10-12 16:25:32',
-  },
-  {
-    id: 3,
-    title: '恶劣天气：泥石流',
-    content: '北侧交通路口',
-    time: '2023-10-12 16:25:32',
-  },
-  {
-    id: 4,
-    title: '重大事件：省人大召开',
-    content: '北侧交通路口',
-    time: '2023-10-12 16:25:32',
-  },
-  {
-    id: 5,
-    title: '恶劣天气：泥石流',
-    content: '北侧交通路口',
-    time: '2023-10-12 16:25:32',
-  },
-]
-
-
-const locations = ['西二环（儿童医院-西直门桥段）', '西三环（丽泽桥-苏州桥段）', '中关村北大街（中关村桥-清华西门段）', '西二环（菜户营桥-广安门桥段）', '长安街（天安门-公主坟段）']
-
-
 const option = ref({
   title: {
     text: "路段车流量预计变化趋势",
@@ -181,6 +137,7 @@ const option1 = ref({
       color: "#fff",
     },
   },
+  color: ['#ff4d4d', '#043654', '#4b96c4', '#f794ba'],
   series: [
     {
       type: 'pie',
