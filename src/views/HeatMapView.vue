@@ -136,12 +136,13 @@ const option1 = ref({
     textStyle: {
       color: "#fff",
     },
+    padding: 25,
   },
   color: ['#ff4d4d', '#043654', '#4b96c4', '#f794ba'],
   series: [
     {
       type: 'pie',
-      center: ['50%', '55%'],
+      center: ['50%', '60%'],
       radius: ['45%', '65%'],
       avoidLabelOverlap: false,
       label: {
@@ -152,7 +153,8 @@ const option1 = ref({
         label: {
           show: true,
           fontSize: 40,
-          fontWeight: 'bold'
+          fontWeight: 'bold',
+          color: "#fff",
         }
       },
       labelLine: {
@@ -168,7 +170,64 @@ const option1 = ref({
   ]
 });
 
-
+const option2 = ref({
+  title: {
+    text: "路段车流量预计变化趋势",
+    textStyle: {
+      color: "#fff",
+      fontSize: 22.5,
+      fontWeight: 500,
+    },
+    left: "center",
+    top: 5,
+  },
+  xAxis: {
+    type: 'category',
+    name: "时间/h",
+    data: ['0', '2', '4', '6', '8', '10', '12', '14', '16', '18', '20', '22'],
+    axisTick: {
+      show: false, // 隐藏刻度线
+    },
+    axisLabel: {
+      color: "#fff",
+    },
+    axisLine: {
+      show: false, // 隐藏坐标轴线
+    },
+    nameTextStyle: {
+      color: "#fff",
+    },
+  },
+  yAxis: {
+    type: 'value',
+    name: "车流量/百万",
+    data: [0, 1, 2, 3, 4, 5, 6],
+    axisLabel: {
+      color: "#fff",
+    },
+    nameTextStyle: {
+      color: "#fff",
+    },
+  },
+  series: [
+    {
+      type: 'line',
+      smooth: true,
+      data: [3, 2, 1.5, 2.5, 4, 5, 4, 3.5, 4, 5, 4, 3.5],
+      color: "#f81112",
+    }, {
+      type: 'line',
+      smooth: true,
+      data: [3.5, 1, 2, 2.5, 3, 1, 3, 1, 4, 4.5, 2, 4],
+      color: "#5dd3ff",
+    },
+  ],
+  grid: {
+    top: '30%',
+    right: 60,
+    bottom: '10%',
+  }
+});
 </script>
 <template>
   <div style="height: 83vh; display: flex; justify-content: center;">
@@ -176,12 +235,23 @@ const option1 = ref({
       <div class="left">
         <div style="height: 35%;"><v-chart :option="option"></v-chart></div>
         <div style="height: 30%;"><v-chart :option="option1"></v-chart></div>
-        <div style="height: 35%;"><v-chart :option="option"></v-chart></div>
+        <div style="height: 35%;"><v-chart :option="option2"></v-chart></div>
       </div>
       <div class="middle" id="center-map">
       </div>
       <div class="right">
-
+        <h2 style="font-weight: 500; margin-top: 5px;">监控视频</h2>
+        <div style="width: 100%; display: flex; justify-content: center;">
+          <video src="/traffic.m4v" autoplay loop muted style="width: 90%; height: 100%;" />
+        </div>
+        <div>
+          <video src="/traffic.m4v" autoplay loop muted style="width: 45%; height: 100%;" />
+          <video src="/traffic.m4v" autoplay loop muted style="width: 45%; height: 100%;" />
+        </div>
+        <div>
+          <video src="/traffic.m4v" autoplay loop muted style="width: 45%; height: 100%;" />
+          <video src="/traffic.m4v" autoplay loop muted style="width: 45%; height: 100%;" />
+        </div>
       </div>
     </div>
   </div>
