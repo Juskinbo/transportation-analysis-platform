@@ -1,77 +1,22 @@
 <script setup>
 import 'echarts/extension/bmap/bmap'
+
+// import data from '@/assets/hangzhou-tracks.json'
+import HeaderBar from '../components/HeaderBar.vue'
 import { ref, onMounted } from 'vue'
+import { useRoute } from 'vue-router'
+const route = useRoute()
+console.log(route.path)
 onMounted(() => {
-
-
   var map1 = new BMap.Map("center-map");
   map1.centerAndZoom(new BMap.Point(120.171387, 30.249298), 13);
   var traffic = new BMap.TrafficLayer();        // 创建交通流量图层实例      
-  map1.addTileLayer(traffic);                    // 将图层添加到地图上
-
-
-  var map2 = new BMap.Map("left-map");
-  map2.centerAndZoom(new BMap.Point(120.171387, 30.249298), 12);
-
-
-
-
-  // axios({
-  //   method: "get",
-  //   url: ROOT_PATH + '/data/asset/data/hangzhou-tracks.json'
-  // }).then(res => {
-  //   console.log(res.data);
-  //   points = [].concat.apply(
-  //     [],
-  //     res.map(function (track) {
-  //       return track.map(function (seg) {
-  //         return seg.coord.concat([1]);
-  //       });
-  //     })
-  //   )
-  // });
+  map1.addTileLayer(traffic);  
+  map1.enableScrollWheelZoom(true);
+  var map = new BMap.Map("left-map");
+  map.centerAndZoom(new BMap.Point(120.171387, 30.249298), 12);
+  map.enableScrollWheelZoom(true);
 })
-// let option1 = {
-//   animation: false,
-//   bmap: {
-//     center: [120.13066322374, 30.240018034923],
-//     zoom: 14,
-//     roam: true,
-//     trafficLayer: true,
-//   },
-//   visualMap: {
-//     show: false,
-//     top: 'top',
-//     min: 0,
-//     max: 5,
-//     seriesIndex: 0,
-//     calculable: true,
-//     inRange: {
-//       color: ['blue', 'blue', 'green', 'yellow', 'red']
-//     }
-//   },
-//   series: [
-//     {
-//       type: 'heatmap',
-//       coordinateSystem: 'bmap',
-//       data: points,
-//       pointSize: 5,
-//       blurSize: 6
-//     }
-//   ]
-// }
-
-// // 添加百度地图插件
-// var bmap = myChart.getModel().getComponent('bmap').getBMap();
-// bmap.addControl(new BMap.MapTypeControl());
-
-
-
-
-
-
-
-
 const warning = [
   {
     id: 1,
@@ -104,8 +49,6 @@ const warning = [
     time: '2023-10-12 16:25:32',
   },
 ]
-
-
 const locations = ['西二环（儿童医院-西直门桥段）', '西三环（丽泽桥-苏州桥段）', '中关村北大街（中关村桥-清华西门段）', '西二环（菜户营桥-广安门桥段）', '长安街（天安门-公主坟段）']
 const option = ref({
   title: {
@@ -180,87 +123,53 @@ const option = ref({
     right: '5%',  // 右边距
     bottom: '5%', // 底边距
   },
-});
+})
 
-const option1 = ref({
-  title: {
-    text: "各区市车流量（单位：辆）",
-    textStyle: {
-      color: "#fff",
-      fontSize: 22.5,
-      fontWeight: 500,
-    },
-    left: "center",
-    top: 15,
-  },
-  xAxis: {
-    type: 'category',
-    data: ['上城区', '下城区', '江干区', '拱墅区', '西湖区', '滨江区', '萧山区', '余杭区', '富阳区', '临安区', '临平区', '钱塘区', '桐庐县', '淳安县', '建德市'],
-    axisTick: {
-      show: false, // 隐藏刻度线
-    },
-    axisLine: {
-      show: false, // 隐藏坐标轴线
-    },
-    axisLabel: {
-      color: "#fff",
-      fontSize: 5,
-    },
-  },
-  yAxis: {
-    type: 'value',
-    show: false
-  },
-  series: [
-    {
-      type: 'pictorialBar',
-      data: [26323, 42312, 42342, 44212, 58213, 61223, 57312, 60213, 40924, 32425, 37123, 44821, 38241, 23042, 32453],
-      barWidth: 10,
-      symbol: 'triangle',
-      itemStyle: {
-        color: {
-          x: 0,
-          y: 0,
-          x2: 0,
-          y2: 1,
-          colorStops: [{
-            offset: 0,
-            color: '#5cadde'
-          }, {
-            offset: 1,
-            color: '#965253'
-          }],
-          global: false
-        },
-        // barBorderRadius: [1, 10, 6, 6]
-      },
-    },
-    {
-      type: 'line',
-      smooth: true,
-      data: [26323, 42312, 42342, 44212, 58213, 61223, 57312, 60213, 40924, 32425, 37123, 44821, 38241, 23042, 32453],
-      color: '#866c7a',
-      label: {
-        show: true, // 显示文字
-        position: 'top',
-        color: '#fff',
-        formatter: '{c}'
-      },
-    }
-  ],
-  grid: {
-    left: '5%',   // 左边距
-    right: '5%',  // 右边距
-    bottom: '10%', // 底边距
-  }
-});
+// const option3 = ref({
+//   animation: false,
+//   bmap: {
+//     center: [120.13066322374, 30.240018034923],
+//     zoom: 14,
+//     roam: true
+//   },
+//   visualMap: {
+//     show: false,
+//     top: 'top',
+//     min: 0,
+//     max: 5,
+//     seriesIndex: 0,
+//     calculable: true,
+//     inRange: {
+//       color: ['blue', 'blue', 'green', 'yellow', 'red']
+//     }
+//   },
+//   series: [
+//     {
+//       type: 'heatmap',
+//       coordinateSystem: 'bmap',
+//       data: [].concat.apply(
+//         [],
+//         data.map(function (track) {
+//           return track.map(function (seg) {
+//             return seg.coord.concat([1])
+//           })
+//         })
+//       ),
+//       pointSize: 5,
+//       blurSize: 6
+//     }
+//   ]
+// })
 </script>
 <template>
+  <header>
+    <HeaderBar />
+  </header>
   <div style="height: 83vh; display: flex; justify-content: center;">
     <div class="traffic-info">
       <div class="left">
         <div class="traffic-congestion">
-          <v-chart :option="option" style="" />
+          <v-chart :option="option" />
           <div class="section-search">
             <h2 style="font-weight: 500; margin-bottom: 10px;">路段查询</h2>
             <div style="display: flex; flex-direction: row; height: 40px;">
@@ -276,6 +185,9 @@ const option1 = ref({
         </div>
       </div>
       <div class="middle" id="center-map">
+        <!-- <div>
+          <v-chart :option="option3" />
+        </div> -->
       </div>
       <div class="right">
         <div class="restricted-section" style="width: 100%; height: 50%;">
@@ -289,7 +201,7 @@ const option1 = ref({
               <p style="color: white;">{{ o.time }}</p>
               <p style="color: white;">
                 <span style="width: 50%;">{{ o.content }}</span>
-                <span style="width:50%; float: right;" >{{ o.title }}</span>
+                <span style="width:50%; float: right;">{{ o.title }}</span>
               </p>
             </li>
           </ul>
@@ -327,7 +239,6 @@ const option1 = ref({
 
 .middle {
   width: 50%;
-  background: #000;
 }
 
 .traffic-congestion {

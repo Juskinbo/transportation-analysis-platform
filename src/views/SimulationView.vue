@@ -1,7 +1,12 @@
 <script setup>
 import { onMounted, ref } from 'vue';
+import { useRoute } from 'vue-router'
+import HeaderBar from '../components/HeaderBar.vue';
+const route = useRoute()
+console.log(route.path)
 onMounted(() => {
   var map = new BMap.Map("simulation-map");
+  map.enableScrollWheelZoom(true);
   map.centerAndZoom(new BMap.Point(120.171387, 30.249298), 13);
   var traffic = new BMap.TrafficLayer();        // 创建交通流量图层实例      
   map.addTileLayer(traffic);                    // 将图层添加到地图上
@@ -87,6 +92,9 @@ const simulationItems = ref([
 const schemeTitles = ref(["", "限行时段", "限行规则", "限行范围"])
 </script>
 <template>
+  <header>
+    <HeaderBar />
+  </header>
   <div style="height: 83vh; display: flex; justify-content: center;">
     <div class="simulation-info">
       <div class=left>
@@ -309,6 +317,7 @@ const schemeTitles = ref(["", "限行时段", "限行规则", "限行范围"])
   display: flex;
   flex-direction: column;
   align-items: center;
+  /* overflow: hidden; */
 }
 
 .simulation-count {
@@ -352,6 +361,7 @@ const schemeTitles = ref(["", "限行时段", "限行规则", "限行范围"])
 .el-button+.el-button {
   margin-left: 0;
   margin: 10px 0;
-}</style>
+}
+</style>
 
 <style></style>

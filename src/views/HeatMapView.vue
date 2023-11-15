@@ -1,6 +1,10 @@
 <script setup>
 import 'echarts/extension/bmap/bmap'
+import HeaderBar from '../components/HeaderBar.vue';
 import { ref, onMounted } from 'vue'
+import {useRoute } from 'vue-router'
+const route = useRoute()
+console.log(route.path)
 onMounted(() => {
 
 
@@ -9,7 +13,7 @@ onMounted(() => {
   var traffic = new BMap.TrafficLayer();        // 创建交通流量图层实例      
   map1.addTileLayer(traffic);                    // 将图层添加到地图上
 
-
+  map1.enableScrollWheelZoom(true); 
 
 
 
@@ -230,6 +234,9 @@ const option2 = ref({
 });
 </script>
 <template>
+    <header>
+    <HeaderBar />
+  </header>
   <div style="height: 83vh; display: flex; justify-content: center;">
     <div class="heat-map">
       <div class="left">
