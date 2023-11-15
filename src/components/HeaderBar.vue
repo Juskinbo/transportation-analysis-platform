@@ -1,15 +1,36 @@
 <script setup>
 // import { onMounted } from 'vue';
+import { onMounted, ref } from 'vue';
+import { useRoute } from 'vue-router';
 import ButtonComponent from './ButtonComponent.vue';
-// import axios from 'axios';
-// onMounted(() => {
-//   axios({
-//     method: "get",
-//     url: ""
-//   }).then(res => {
-//     console.log(res.data);
-//   });
-// });
+import homeBackground from '@/assets/home-header-img.svg';
+import SimulationBackground from '@/assets/simulation-header-img.svg';
+import heatmapBackground from '@/assets/heatmap-header-img.svg';
+const backgroundImage = ref("");
+onMounted(() => {
+  console.log('HeaderBar mounted!');
+
+  const route = useRoute();
+
+
+  // 判断路由
+  if (route.path === "/") {
+    console.log(route.path);
+    backgroundImage.value = `url(${homeBackground})`;
+  }
+  else if (route.path === "/simulation") {
+    console.log(route.path);
+    backgroundImage.value = `url(${SimulationBackground})`;
+  }
+  else if (route.path === "/heatmap") {
+    console.log(route.path);
+    backgroundImage.value = `url(${heatmapBackground})`;
+  }
+  else {
+    console.log(route.path);
+    backgroundImage.value = `url(${homeBackground})`;
+  }
+});
 
 
 </script>
@@ -25,7 +46,8 @@ import ButtonComponent from './ButtonComponent.vue';
     </div>
     <div class="title">
       <ButtonComponent position="left-button" text="路段热力图" link="null" style="height: 40%;" />
-      <div class="main-title"><span class="main-title-text">智慧交通大数据分析平台</span></div>
+      <div class="main-title" :style="{ background: backgroundImage }"><span class="main-title-text">智慧交通大数据分析平台</span>
+      </div>
       <ButtonComponent position="right-button" text="路段分析" link="null" style="height: 40%;" />
     </div>
     <div class="account-info">
@@ -48,7 +70,7 @@ import ButtonComponent from './ButtonComponent.vue';
 
 .title {
   width: 60%;
-  height: 80%;
+  height: 100%;
   /* background-image: url('/images/header.png'); */
   background-size: 100% 100%;
   background-position: center;
@@ -59,15 +81,12 @@ import ButtonComponent from './ButtonComponent.vue';
 }
 
 .main-title {
-  background: url('@/assets/header-img.svg');
-  background-size: contain;
-  background-position: center;
-  background-repeat: no-repeat;
+  background-size: contain !important;
+  background-position: center top !important;
+  background-repeat: no-repeat !important;
   height: 100%;
-  /* margin-left: 50px; */
   padding-left: 60px;
   padding-right: 60px;
-  /* margin-right: 50px; */
   display: flex;
   align-items: center;
 }
@@ -76,6 +95,9 @@ import ButtonComponent from './ButtonComponent.vue';
   white-space: nowrap;
   font-size: 30px;
   font-weight: 600;
+  margin-bottom: 10%;
+  /* 文字不显示 */
+  color: transparent;
 }
 
 .weather,
@@ -98,3 +120,5 @@ import ButtonComponent from './ButtonComponent.vue';
   right: 0;
 }
 </style>
+
+

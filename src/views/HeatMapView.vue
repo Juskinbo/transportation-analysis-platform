@@ -241,17 +241,20 @@ const option2 = ref({
       </div>
       <div class="right">
         <h2 style="font-weight: 500; margin-top: 5px;">监控视频</h2>
-        <div style="width: 100%; display: flex; justify-content: center;">
-          <video src="/traffic.m4v" autoplay loop muted style="width: 90%; height: 100%;" />
+        <div style="width: 100%; display: flex; justify-content: center; height: 40%; margin-bottom: 5%;">
+          <video src="/traffic.m4v" autoplay loop muted style="width: 90%; height: 100%; object-fit: cover;" />
         </div>
-        <div>
-          <video src="/traffic.m4v" autoplay loop muted style="width: 45%; height: 100%;" />
-          <video src="/traffic.m4v" autoplay loop muted style="width: 45%; height: 100%;" />
+        <div style="width: 100%; display: flex; justify-content: center; height: 40%;">
+          <video src="/traffic2.m4v" autoplay loop muted style="width: 90%; height: 100%; object-fit: cover;" />
         </div>
-        <div>
-          <video src="/traffic.m4v" autoplay loop muted style="width: 45%; height: 100%;" />
-          <video src="/traffic.m4v" autoplay loop muted style="width: 45%; height: 100%;" />
+        <!-- <div style="height: 25%; margin-bottom: 2%;">
+          <video src="/traffic.m4v" autoplay loop muted style="width: 45%; height: 100%; object-fit: cover; margin-right: 2%;" />
+          <video src="/traffic2.m4v" autoplay loop muted style="width: 45%; height: 100%; object-fit: cover;" />
         </div>
+        <div style="height: 25%;">
+          <video src="/traffic.m4v" autoplay loop muted style="width: 45%; height: 100%; object-fit: cover; margin-right: 2%;" />
+          <video src="/traffic2.m4v" autoplay loop muted style="width: 45%; height: 100%; object-fit: cover;" />
+        </div> -->
       </div>
     </div>
   </div>

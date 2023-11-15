@@ -11,7 +11,6 @@ const props = defineProps({
 </template>
 <style scoped>
 button {
-  
   border: none;
   padding: 10px 20px;
   display: inline-block;
