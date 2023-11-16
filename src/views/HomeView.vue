@@ -1,19 +1,19 @@
 <script setup>
 import 'echarts/extension/bmap/bmap'
-
+import restrictedSections from '@/assets/restricted-sections.json'
 // import data from '@/assets/hangzhou-tracks.json'
 import HeaderBar from '../components/HeaderBar.vue'
 import { ref, onMounted } from 'vue'
 import { useRoute } from 'vue-router'
 const route = useRoute()
-console.log(route.path)
+var map
 onMounted(() => {
   var map1 = new BMap.Map("center-map");
   map1.centerAndZoom(new BMap.Point(120.171387, 30.249298), 13);
   var traffic = new BMap.TrafficLayer();        // 创建交通流量图层实例      
-  map1.addTileLayer(traffic);  
+  map1.addTileLayer(traffic);
   map1.enableScrollWheelZoom(true);
-  var map = new BMap.Map("left-map");
+  map = new BMap.Map("left-map");
   map.centerAndZoom(new BMap.Point(120.171387, 30.249298), 12);
   map.enableScrollWheelZoom(true);
 })
@@ -160,6 +160,19 @@ const option = ref({
 //     }
 //   ]
 // })
+
+const searchInput = ref("")
+const search = () => {
+  console.log(searchInput.value)
+  let locationX, locationY
+  restrictedSections.forEach((item) => {
+    if (item.section === searchInput.value) {
+      locationX = item.locationX
+      locationY = item.locationY
+    }
+  })
+  map.centerAndZoom(new BMap.Point(locationX, locationY), 15);
+}
 </script>
 <template>
   <header>
@@ -177,7 +190,8 @@ const option = ref({
                 限行路段：
               </span>
               <el-input v-model="searchInput" placeholder="请输入路段" style="max-width: 50%; margin-right: 20px;" />
-              <el-button type="primary" style="border-radius: 10px; height: 100%; margin-left: auto;">查询</el-button>
+              <el-button type="primary" @click="search"
+                style="border-radius: 10px; height: 100%; margin-left: auto;">查询</el-button>
             </div>
             <div id="left-map" style="width: 100%; height: 100%; margin-top: 5%;">
             </div>

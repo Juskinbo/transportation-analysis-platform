@@ -4,7 +4,6 @@ import HeaderBar from '../components/HeaderBar.vue';
 import { ref, onMounted } from 'vue'
 import {useRoute } from 'vue-router'
 const route = useRoute()
-console.log(route.path)
 onMounted(() => {
 
 
@@ -15,22 +14,6 @@ onMounted(() => {
 
   map1.enableScrollWheelZoom(true); 
 
-
-
-  // axios({
-  //   method: "get",
-  //   url: ROOT_PATH + '/data/asset/data/hangzhou-tracks.json'
-  // }).then(res => {
-  //   console.log(res.data);
-  //   points = [].concat.apply(
-  //     [],
-  //     res.map(function (track) {
-  //       return track.map(function (seg) {
-  //         return seg.coord.concat([1]);
-  //       });
-  //     })
-  //   )
-  // });
 })
 // let option1 = {
 //   animation: false,

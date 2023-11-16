@@ -15,7 +15,6 @@ button {
   padding: 10px 20px;
   display: inline-block;
   font-size: 15px;
-  font-weight: 600;
   width: 120px;
   text-transform: uppercase;
   cursor: pointer;
@@ -25,6 +24,7 @@ span {
   white-space: nowrap;
   color: #fff;
   display: inline-block;
+  font-weight: 800;
 }
 
 .left-button {

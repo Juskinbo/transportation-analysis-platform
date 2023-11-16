@@ -8,26 +8,18 @@ import SimulationBackground from '@/assets/simulation-header-img.svg';
 import heatmapBackground from '@/assets/heatmap-header-img.svg';
 const backgroundImage = ref("");
 onMounted(() => {
-  console.log('HeaderBar mounted!');
-
   const route = useRoute();
-
-
   // 判断路由
   if (route.path === "/") {
-    console.log(route.path);
     backgroundImage.value = `url(${homeBackground})`;
   }
   else if (route.path === "/simulation") {
-    console.log(route.path);
     backgroundImage.value = `url(${SimulationBackground})`;
   }
   else if (route.path === "/heatmap") {
-    console.log(route.path);
     backgroundImage.value = `url(${heatmapBackground})`;
   }
   else {
-    console.log(route.path);
     backgroundImage.value = `url(${homeBackground})`;
   }
 });

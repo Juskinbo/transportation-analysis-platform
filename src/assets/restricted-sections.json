@@ -1,0 +1,92 @@
+[
+  {
+    "section": "留祥路",
+    "locationX": "120.002246",
+    "locationY": "30.316027"
+  },
+  {
+    "section": "石祥路",
+    "locationX": "120.159128",
+    "locationY": "30.336528"
+  },
+  {
+    "section": "石桥路",
+    "locationX": "120.200601",
+    "locationY": "30.325316"
+  },
+  {
+    "section": "秋涛路",
+    "locationX": "120.206504",
+    "locationY": "30.25013"
+  },
+  {
+    "section": "复兴路",
+    "locationX": "120.170119",
+    "locationY": "30.216016"
+  },
+  {
+    "section": "老复兴路",
+    "locationX": "120.144028",
+    "locationY": "30.20573"
+  },
+  {
+    "section": "虎跑路",
+    "locationX": "120.14232",
+    "locationY": "30.220185"
+  },
+  {
+    "section": "满觉陇路",
+    "locationX": "120.138468",
+    "locationY": "30.22511"
+  },
+  {
+    "section": "五老峰隧道",
+    "locationX": "120.128139",
+    "locationY": "30.233763"
+  },
+  {
+    "section": "吉庆山隧道",
+    "locationX": "120.124164",
+    "locationY": "30.239411"
+  },
+  {
+    "section": "梅灵北路",
+    "locationX": "120.111491",
+    "locationY": "30.242505"
+  },
+  {
+    "section": "九里松隧道",
+    "locationX": "120.120947",
+    "locationY": "30.251254"
+  },
+  {
+    "section": "灵溪南路",
+    "locationX": "120.118276",
+    "locationY": "30.253475"
+  },
+  {
+    "section": "灵溪隧道",
+    "locationX": "120.114535",
+    "locationY": "30.256433"
+  },
+  {
+    "section": "西溪路",
+    "locationX": "120.074106",
+    "locationY": "30.250888"
+  },
+  {
+    "section": "紫金港路",
+    "locationX": "120.09159",
+    "locationY": "30.292701"
+  },
+  {
+    "section": "文一西路",
+    "locationX": "119.987174",
+    "locationY": "30.28096"
+  },
+  {
+    "section": "古墩路",
+    "locationX": "120.103284",
+    "locationY": "30.303185"
+  }
+]

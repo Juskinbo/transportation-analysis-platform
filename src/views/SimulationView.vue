@@ -1,9 +1,7 @@
 <script setup>
-import { onMounted, ref } from 'vue';
-import { useRoute } from 'vue-router'
-import HeaderBar from '../components/HeaderBar.vue';
-const route = useRoute()
-console.log(route.path)
+import { onMounted, reactive, ref } from 'vue'
+import HeaderBar from '../components/HeaderBar.vue'
+import TagComponent from '../components/TagComponent.vue';
 onMounted(() => {
   var map = new BMap.Map("simulation-map");
   map.enableScrollWheelZoom(true);
@@ -11,7 +9,10 @@ onMounted(() => {
   var traffic = new BMap.TrafficLayer();        // 创建交通流量图层实例      
   map.addTileLayer(traffic);                    // 将图层添加到地图上
 });
-
+const count = ref(0)
+const sectionValue = ref("");
+const tagValue = ref("");
+const sections = ["留祥路", "石祥路", "石桥路", "秋涛路", "复兴路", "老复兴路", "虎跑路", "满觉陇路", "五老峰隧道", "吉庆山隧道", "梅灵北路", "九里松隧道", "灵溪南路", "灵溪隧道", "西溪路", "紫金港路", "文一西路", "古墩路"]
 const option = ref({
   title: {
     text: "路段车流量预计变化趋势",
@@ -67,29 +68,78 @@ const option = ref({
 });
 
 const simulationItems = ref([
-  {
-    index: 1,
-    time: "2023-10-12 16:25:32",
-    type: "和平南路 单号 蓝牌小轿车"
-  },
-  {
-    index: 2,
-    time: "2023-10-12 16:25:32",
-    type: "和平南路 单号 蓝牌小轿车"
-  },
-  {
-    index: 3,
-    time: "2023-10-12 16:25:32",
-    type: "和平南路 单号 蓝牌小轿车"
-  },
-  {
-    index: 4,
-    time: "2023-10-12 16:25:32",
-    type: "和平南路 单号 蓝牌小轿车"
-  }
+  // {
+  //   index: 1,
+  //   time: "2023-10-12 16:25:32",
+  //   type: "和平南路 单号 蓝牌小轿车"
+  // },
+  // {
+  //   index: 2,
+  //   time: "2023-10-12 16:25:32",
+  //   type: "和平南路 单号 蓝牌小轿车"
+  // },
+  // {
+  //   index: 3,
+  //   time: "2023-10-12 16:25:32",
+  //   type: "和平南路 单号 蓝牌小轿车"
+  // },
+  // {
+  //   index: 4,
+  //   time: "2023-10-12 16:25:32",
+  //   type: "和平南路 单号 蓝牌小轿车"
+  // }
 ])
-
 const schemeTitles = ref(["", "限行时段", "限行规则", "限行范围"])
+const tags = reactive([])
+const tagTemp = ref([])
+
+const addTag = () => {
+  // console.log(tagValue.value)
+  // 先判断一下sectionValue.value是否为空
+  if (sectionValue.value === "") {
+    alert("请输入模拟路段")
+    return
+  }
+  // 然后判断一下sectionValue.value是否已经存在
+  if (tags.some(o => o.section === sectionValue.value)) {
+    // 找到这条记录然后在tag里面添加
+    const index = tags.findIndex(o => o.section === sectionValue.value)
+    tags[index].tag.push(tagValue.value)
+  }
+  else {
+    tags.push({
+      section: sectionValue.value,
+      tag: [tagValue.value]
+    })
+  }
+  // 遍历tags
+  tags.forEach(o => {
+    if (o.section === sectionValue.value) {
+      tagTemp.value = o.tag
+    }
+  })
+  console.log(tags)
+  console.log(tagTemp.value)
+  tagValue.value = ""
+}
+
+const simulate = () => {
+  simulationItems.value.push({
+    index: simulationItems.value.length + 1,
+    time: tagTemp.value[0],
+    type: sectionValue.value + " " + tagTemp.value[1] + " " + tagTemp.value[2]
+  })
+  count.value += 1
+  // tagTemp 清空
+  tagTemp.value = []
+  sectionValue.value = ""
+  console.log(tagTemp.value)
+}
+const reset = () => {
+  tags.splice(0, tags.length)
+  tagValue.value = ""
+  sectionValue.value = ""
+}
 </script>
 <template>
   <header>
@@ -105,22 +155,28 @@ const schemeTitles = ref(["", "限行时段", "限行规则", "限行范围"])
                 <h3 style="width: 50%; text-align: left;">
                   输入标签：
                 </h3>
-                <el-input style="width: 50%;" placeholder="请输入标签"> </el-input>
+                <el-input v-model="tagValue" style="width: 50%;" placeholder="请输入标签"> </el-input>
               </div>
               <div class="section-input">
                 <h3 style="width: 50%; text-align: left;">
                   输入模拟路段：
                 </h3>
-                <el-select style="width: 50%;" placeholder="请输入模拟路段名"></el-select>
+                <el-select v-model="sectionValue" style="width: 50%;" placeholder="请输入模拟路段名">
+                  <el-option v-for="item in sections" :key="item" :label="item" :value="item" />
+                </el-select>
               </div>
             </div>
             <div class="simulation-tag">
               <!-- 展示所有标签 -->
+              <div style="width: 90%; height: 80%; display: flex; flex-direction: row;">
+                <TagComponent v-for="o in tagTemp" :key="o" :value="o" />
+              </div>
             </div>
           </div>
           <div class="simulation-button">
-            <el-button type="info">重置</el-button>
-            <el-button type="primary">模拟</el-button>
+            <el-button type="primary" @click="addTag">添加</el-button>
+            <el-button type="primary" @click="simulate">模拟</el-button>
+            <el-button type="info" @click="reset">重置</el-button>
           </div>
         </div>
         <div class="simulation-data">
@@ -142,11 +198,11 @@ const schemeTitles = ref(["", "限行时段", "限行规则", "限行范围"])
         <div class="simulation-history">
           <div style="width: 100%; background: linear-gradient(to bottom, #fc333d, #762528)">模拟记录</div>
           <div class="simulation-count">
-            <span style="font-size: 38px; font-weight: 600; color:  #e74750;">24</span>
+            <span style="font-size: 38px; font-weight: 600; color:  #e74750;">{{ count }}</span>
           </div>
           <div class="simulation-item">
-            <div style="">
-              <ul style="line-height: 1.3;">
+            <div class="simulation-list">
+              <ul style="line-height: 1.3; overflow: hidden;">
                 <li v-for="o in simulationItems" :key="o.index" style="margin-top: 10px;">
                   <p>{{ o.time }}</p>
                   <p>{{ o.type }}</p>
@@ -255,6 +311,9 @@ const schemeTitles = ref(["", "限行时段", "限行规则", "限行范围"])
   background-color: #0e586d;
   width: 65%;
   height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .simulation-button {
@@ -345,6 +404,10 @@ const schemeTitles = ref(["", "限行时段", "限行规则", "限行范围"])
   color: #e74750;
 }
 
+.simulation-list {
+  height: 80%;
+}
+
 .scheme-generation {
   display: flex;
   justify-content: center;
@@ -353,14 +416,9 @@ const schemeTitles = ref(["", "限行时段", "限行规则", "限行范围"])
   flex: 1;
 }
 
-
-
-
-
-
 .el-button+.el-button {
   margin-left: 0;
-  margin: 10px 0;
+  margin-top: 10px;
 }
 </style>
 
