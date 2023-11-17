@@ -96,6 +96,10 @@ const tagTemp = ref([])
 const addTag = () => {
   // console.log(tagValue.value)
   // 先判断一下sectionValue.value是否为空
+  if(tagValue.value === "") {
+    alert("请输入标签")
+    return
+  }
   if (sectionValue.value === "") {
     alert("请输入模拟路段")
     return

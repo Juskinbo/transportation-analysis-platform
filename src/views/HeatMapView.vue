@@ -1,57 +1,35 @@
 <script setup>
+import restrictedSections from '@/assets/restricted-sections.json'
 import 'echarts/extension/bmap/bmap'
 import HeaderBar from '../components/HeaderBar.vue';
 import { ref, onMounted } from 'vue'
-import {useRoute } from 'vue-router'
+import { useRoute } from 'vue-router'
 const route = useRoute()
-onMounted(() => {
-
-
-  var map1 = new BMap.Map("center-map");
-  map1.centerAndZoom(new BMap.Point(120.171387, 30.249298), 13);
-  var traffic = new BMap.TrafficLayer();        // 创建交通流量图层实例      
-  map1.addTileLayer(traffic);                    // 将图层添加到地图上
-
-  map1.enableScrollWheelZoom(true); 
-
+const locationX = ref()
+const locationY = ref()
+const section = ref(route.query.section)
+restrictedSections.forEach((item) => {
+  if (item.section === section.value) {
+    locationX.value = item.locationX
+    locationY.value = item.locationY
+  }
 })
-// let option1 = {
-//   animation: false,
-//   bmap: {
-//     center: [120.13066322374, 30.240018034923],
-//     zoom: 14,
-//     roam: true,
-//     trafficLayer: true,
-//   },
-//   visualMap: {
-//     show: false,
-//     top: 'top',
-//     min: 0,
-//     max: 5,
-//     seriesIndex: 0,
-//     calculable: true,
-//     inRange: {
-//       color: ['blue', 'blue', 'green', 'yellow', 'red']
-//     }
-//   },
-//   series: [
-//     {
-//       type: 'heatmap',
-//       coordinateSystem: 'bmap',
-//       data: points,
-//       pointSize: 5,
-//       blurSize: 6
-//     }
-//   ]
-// }
-
-// // 添加百度地图插件
-// var bmap = myChart.getModel().getComponent('bmap').getBMap();
-// bmap.addControl(new BMap.MapTypeControl());
+onMounted(() => {
+  var map = new BMap.Map("center-map")
+  if (locationX.value !== undefined && locationY.value !== undefined) {
+    map.centerAndZoom(new BMap.Point(locationX.value, locationY.value), 17)
+  }
+  else {
+    map.centerAndZoom(new BMap.Point(120.171387, 30.249298), 17)
+  }
+  var traffic = new BMap.TrafficLayer()
+  map.addTileLayer(traffic)
+  map.enableScrollWheelZoom(true)
+})
 
 const option = ref({
   title: {
-    text: "路段车流量预计变化趋势",
+    text: "车流量变化趋势",
     textStyle: {
       color: "#fff",
       fontSize: 22.5,
@@ -159,7 +137,7 @@ const option1 = ref({
 
 const option2 = ref({
   title: {
-    text: "路段车流量预计变化趋势",
+    text: "车辆流入/出曲线图",
     textStyle: {
       color: "#fff",
       fontSize: 22.5,
@@ -167,6 +145,13 @@ const option2 = ref({
     },
     left: "center",
     top: 5,
+  },
+  legend: {
+    data: ['流入', '流出'],
+    textStyle: {
+      color: "#fff",
+    },
+    padding: 40,
   },
   xAxis: {
     type: 'category',
@@ -198,11 +183,13 @@ const option2 = ref({
   },
   series: [
     {
+      name: '流入',
       type: 'line',
       smooth: true,
       data: [3, 2, 1.5, 2.5, 4, 5, 4, 3.5, 4, 5, 4, 3.5],
       color: "#f81112",
     }, {
+      name: '流出',
       type: 'line',
       smooth: true,
       data: [3.5, 1, 2, 2.5, 3, 1, 3, 1, 4, 4.5, 2, 4],
@@ -217,7 +204,7 @@ const option2 = ref({
 });
 </script>
 <template>
-    <header>
+  <header>
     <HeaderBar />
   </header>
   <div style="height: 83vh; display: flex; justify-content: center;">

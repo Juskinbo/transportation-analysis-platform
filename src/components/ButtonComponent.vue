@@ -1,13 +1,20 @@
 <script setup>
+import { RouterLink } from 'vue-router'
 const props = defineProps({
   position: String,
   text: String,
   link: String
-});
+})
 
 </script>
 <template>
-  <button :class="props.position"><span :class="props.position + '-text'">{{ props.text }}</span></button>
+  <button :class="props.position">
+    <RouterLink :to="props.link">
+      <span :class="props.position + '-text'">
+        {{ props.text }}
+      </span>
+    </RouterLink>
+  </button>
 </template>
 <style scoped>
 button {

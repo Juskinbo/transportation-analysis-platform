@@ -1,11 +1,11 @@
 <script setup>
 import 'echarts/extension/bmap/bmap'
-import restrictedSections from '@/assets/restricted-sections.json'
 // import data from '@/assets/hangzhou-tracks.json'
 import HeaderBar from '../components/HeaderBar.vue'
 import { ref, onMounted } from 'vue'
-import { useRoute } from 'vue-router'
+import { useRoute, useRouter } from 'vue-router'
 const route = useRoute()
+const router = useRouter()
 var map
 onMounted(() => {
   var map1 = new BMap.Map("center-map");
@@ -16,6 +16,8 @@ onMounted(() => {
   map = new BMap.Map("left-map");
   map.centerAndZoom(new BMap.Point(120.171387, 30.249298), 12);
   map.enableScrollWheelZoom(true);
+  var traffic1 = new BMap.TrafficLayer();
+  map.addTileLayer(traffic1);
 })
 const warning = [
   {
@@ -163,15 +165,15 @@ const option = ref({
 
 const searchInput = ref("")
 const search = () => {
-  console.log(searchInput.value)
-  let locationX, locationY
-  restrictedSections.forEach((item) => {
-    if (item.section === searchInput.value) {
-      locationX = item.locationX
-      locationY = item.locationY
+  if (searchInput.value === "") {
+    return
+  }
+  router.push({
+    path: '/heatmap',
+    query: {
+      section: searchInput.value
     }
   })
-  map.centerAndZoom(new BMap.Point(locationX, locationY), 15);
 }
 </script>
 <template>
@@ -206,7 +208,7 @@ const search = () => {
       <div class="right">
         <div class="restricted-section" style="width: 100%; height: 50%;">
           <h2 style="margin: 15px 0 10px; font-weight: 500;">限行路段图</h2>
-          <img src="@/assets/restricted-travel-chart.jpg" alt="" style="width: 90%; height: 80%;">
+          <img src="@/assets/restricted-travel-chart.jpg" style="width: 90%; height: 80%;">
         </div>
         <div class="traffic-warning" style="height: 50%; width: 90%;">
           <h2 style="font-weight: 500; margin-bottom: 10px;">交通预报警</h2>
