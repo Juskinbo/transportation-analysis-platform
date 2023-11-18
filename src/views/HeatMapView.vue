@@ -1,9 +1,11 @@
 <script setup>
 import restrictedSections from '@/assets/restricted-sections.json'
 import 'echarts/extension/bmap/bmap'
-import HeaderBar from '../components/HeaderBar.vue';
+import HeaderBar from '../components/HeaderBar.vue'
 import { ref, onMounted } from 'vue'
 import { useRoute } from 'vue-router'
+import video1 from '@/assets/traffic1.mp4'
+import video2 from '@/assets/traffic2.mp4'
 const route = useRoute()
 const locationX = ref()
 const locationY = ref()
@@ -70,7 +72,7 @@ const option = ref({
     {
       type: 'line',
       smooth: true,
-      data: [3, 2, 1.5, 2.5, 4, 5, 4, 3.5, 4, 5, 4, 3.5],
+      data: [4, 3, 2, 2.5, 4, 5, 4, 3.5, 4, 2, 4, 1],
       color: "red",
     },
   ],
@@ -219,10 +221,10 @@ const option2 = ref({
       <div class="right">
         <h2 style="font-weight: 500; margin-top: 5px;">监控视频</h2>
         <div style="width: 100%; display: flex; justify-content: center; height: 40%; margin-bottom: 5%;">
-          <video src="/traffic.m4v" autoplay loop muted style="width: 90%; height: 100%; object-fit: cover;" />
+          <video :src="video1" autoplay loop muted style="width: 90%; height: 100%; object-fit: cover;" />
         </div>
         <div style="width: 100%; display: flex; justify-content: center; height: 40%;">
-          <video src="/traffic2.m4v" autoplay loop muted style="width: 90%; height: 100%; object-fit: cover;" />
+          <video :src="video2" autoplay loop muted style="width: 90%; height: 100%; object-fit: cover;" />
         </div>
         <!-- <div style="height: 25%; margin-bottom: 2%;">
           <video src="/traffic.m4v" autoplay loop muted style="width: 45%; height: 100%; object-fit: cover; margin-right: 2%;" />
