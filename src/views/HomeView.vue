@@ -51,7 +51,7 @@ const warning = [
     time: '2023-10-12 16:25:32',
   },
 ]
-const locations = ['西二环（儿童医院-西直门桥段）', '西三环（丽泽桥-苏州桥段）', '中关村北大街（中关村桥-清华西门段）', '西二环（菜户营桥-广安门桥段）', '长安街（天安门-公主坟段）']
+const locations = ['留祥路', '石祥路', '石桥路', '秋涛路', '复兴路']
 const option = ref({
   title: {
     text: "路段域拥堵TOP5",
@@ -115,7 +115,7 @@ const option = ref({
           var value = params.value; // 柱子的数值
           var locationIndex = params.dataIndex; // 获取地点在数组中的索引
           var location = locations[locationIndex] // 获取地点
-          return `${location}${value}`
+          return `${location}\u0020\u0020\u0020\u0020${value}`
         },
       },
     },
@@ -126,43 +126,6 @@ const option = ref({
     bottom: '5%', // 底边距
   },
 })
-
-// const option3 = ref({
-//   animation: false,
-//   bmap: {
-//     center: [120.13066322374, 30.240018034923],
-//     zoom: 14,
-//     roam: true
-//   },
-//   visualMap: {
-//     show: false,
-//     top: 'top',
-//     min: 0,
-//     max: 5,
-//     seriesIndex: 0,
-//     calculable: true,
-//     inRange: {
-//       color: ['blue', 'blue', 'green', 'yellow', 'red']
-//     }
-//   },
-//   series: [
-//     {
-//       type: 'heatmap',
-//       coordinateSystem: 'bmap',
-//       data: [].concat.apply(
-//         [],
-//         data.map(function (track) {
-//           return track.map(function (seg) {
-//             return seg.coord.concat([1])
-//           })
-//         })
-//       ),
-//       pointSize: 5,
-//       blurSize: 6
-//     }
-//   ]
-// })
-
 const searchInput = ref("")
 const search = () => {
   if (searchInput.value === "") {

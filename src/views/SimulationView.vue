@@ -11,6 +11,25 @@ onMounted(() => {
 });
 const count = ref(0)
 const sectionValue = ref("");
+const simulationData = ref([{
+  name: "在途辆：",
+  value: '79992辆',
+}, {
+  name: "道路承载力：",
+  value: '90000辆'
+}, {
+  name: "平均流量：",
+  value: '500辆/分钟',
+}, {
+  name: "出行时间：",
+  value: '少于正常时间3分钟',
+}, {
+  name: "拥堵指数：",
+  value: '8.5',
+}, {
+  name: "拥堵时长：",
+  value: '30分钟',
+}])
 const tagValue = ref("");
 const sections = ["留祥路", "石祥路", "石桥路", "秋涛路", "复兴路", "老复兴路", "虎跑路", "满觉陇路", "五老峰隧道", "吉庆山隧道", "梅灵北路", "九里松隧道", "灵溪南路", "灵溪隧道", "西溪路", "紫金港路", "文一西路", "古墩路"]
 const option = ref({
@@ -66,37 +85,13 @@ const option = ref({
     bottom: '10%',
   }
 });
-
-const simulationItems = ref([
-  // {
-  //   index: 1,
-  //   time: "2023-10-12 16:25:32",
-  //   type: "和平南路 单号 蓝牌小轿车"
-  // },
-  // {
-  //   index: 2,
-  //   time: "2023-10-12 16:25:32",
-  //   type: "和平南路 单号 蓝牌小轿车"
-  // },
-  // {
-  //   index: 3,
-  //   time: "2023-10-12 16:25:32",
-  //   type: "和平南路 单号 蓝牌小轿车"
-  // },
-  // {
-  //   index: 4,
-  //   time: "2023-10-12 16:25:32",
-  //   type: "和平南路 单号 蓝牌小轿车"
-  // }
-])
+const simulationItems = ref([])
 const schemeTitles = ref(["", "限行时段", "限行规则", "限行范围"])
 const tags = reactive([])
 const tagTemp = ref([])
 
 const addTag = () => {
-  // console.log(tagValue.value)
-  // 先判断一下sectionValue.value是否为空
-  if(tagValue.value === "") {
+  if (tagValue.value === "") {
     alert("请输入标签")
     return
   }
@@ -109,6 +104,7 @@ const addTag = () => {
     // 找到这条记录然后在tag里面添加
     const index = tags.findIndex(o => o.section === sectionValue.value)
     tags[index].tag.push(tagValue.value)
+    console.log(111)
   }
   else {
     tags.push({
@@ -189,7 +185,21 @@ const reset = () => {
               <v-chart :option="option"></v-chart>
             </div>
             <div class="pressure-analysis">
-              <v-chart :option="option"></v-chart>
+              <h2 style="font-weight: 500; margin-bottom: 20px;">模拟路段交通压力分析</h2>
+              <ul>
+                <li v-for="o in simulationData" :key="o.name" style="display: flex; line-height: 2;">
+                  <div style="width: 50%;">
+                    <div style="width: 60%; text-align: right; white-space: nowrap;">
+                      {{ o.name }}
+                    </div>
+                  </div>
+                  <div style="width: 50%;">
+                    <div style="width: 80%; white-space: nowrap;">
+                      {{ o.value }}
+                    </div>
+                  </div>
+                </li>
+              </ul>
             </div>
           </div>
           <div class="section-simulation">
