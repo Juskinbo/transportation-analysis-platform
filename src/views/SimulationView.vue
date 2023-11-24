@@ -85,6 +85,17 @@ const option = ref({
     bottom: '10%',
   }
 });
+
+const tempItems = reactive([{
+  index: 1,
+  value: "限行时间：\n    城高速公路内所有高架路、快速路 (含匝道以及附属桥梁、隧道)的错峰时段为工作日的7:00一10:00和16:00-19:00限行路段：    “非浙A号牌”小客车错峰出行的高架路、快速路，具体包括彩虹快速路、之江大桥、紫之隧道紫金港路隧道、紫金港路南隧道、留石高架路、东湖快速路、九堡大桥、通城高架路、时代高架、中河高架路、上塘高架路、秋石高架路、西兴大桥复兴大桥、钱塘快速路、德胜快速路、文一路隧道等\n限行规则：\n    错峰时段内实行全号段禁止通行"
+}, {
+  index: 3,
+  value: "限行时间：\n    城高速公路内所有高架路、快速路 (含匝道以及附属桥梁、隧道)的错峰时段为工作日的7:00一10:00和16:00-19:00限行路段：    “非浙A号牌”小客车错峰出行的高架路、快速路，具体包括彩虹快速路、之江大桥、紫之隧道紫金港路隧道、紫金港路南隧道、留石高架路、东湖快速路、九堡大桥、通城高架路、时代高架、中河高架路、上塘高架路、秋石高架路、西兴大桥复兴大桥、钱塘快速路、德胜快速路、文一路隧道等\n限行规则：\n    错峰时段内实行全号段禁止通行"
+}, {
+  index: 2,
+  value: "限行时间：\n    城高速公路内所有高架路、快速路 (含匝道以及附属桥梁、隧道)的错峰时段为工作日的7:00一10:00和16:00-19:00限行路段：    “非浙A号牌”小客车错峰出行的高架路、快速路，具体包括彩虹快速路、之江大桥、紫之隧道紫金港路隧道、紫金港路南隧道、留石高架路、东湖快速路、九堡大桥、通城高架路、时代高架、中河高架路、上塘高架路、秋石高架路、西兴大桥复兴大桥、钱塘快速路、德胜快速路、文一路隧道等\n限行规则：\n    错峰时段内实行全号段禁止通行"
+},])
 const simulationItems = ref([])
 const schemeTitles = ref(["", "限行时段", "限行规则", "限行范围"])
 const tags = reactive([])
@@ -196,18 +207,20 @@ const reset = () => {
       </div>
       <div class="right">
         <div class="simulation-history">
-          <div style="width: 100%; background: linear-gradient(to bottom, #fc333d, #762528)">模拟记录</div>
+          <div style="width: 100%; background: linear-gradient(to bottom, #fc333d, #762528)">方案推荐</div>
           <div class="simulation-count">
             <span style="font-size: 38px; font-weight: 600; color:  #e74750;">{{ count }}</span>
           </div>
           <div class="simulation-item">
             <div class="simulation-list">
-              <ul style="line-height: 1.3; overflow: hidden;">
-                <li v-for="o in simulationItems" :key="o.index" style="margin-top: 10px;">
-                  <p>{{ o.time }}</p>
-                  <p>{{ o.type }}</p>
-                </li>
-              </ul>
+              <el-scrollbar>
+                <ul style="line-height: 1.3; overflow: hidden;">
+                  <li v-for="o in tempItems" :key="o.index" style="margin-top: 10px;">
+                    <!-- <p>{{ o. }}</p> -->
+                    <p style="white-space: pre-wrap;">{{ o.value }}</p>
+                  </li>
+                </ul>
+              </el-scrollbar>
             </div>
             <div class="scheme-generation">
               <el-button text style="width: 40%; color: white; background: linear-gradient(to bottom, #fd333e, #762429);">
@@ -356,10 +369,6 @@ const reset = () => {
 }
 
 .changing-trends {
-  height: 50%;
-}
-
-.pressure-analysis {
   height: 50%;
 }
 
