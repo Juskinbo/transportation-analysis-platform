@@ -150,63 +150,49 @@ const reset = () => {
       <div class=left>
         <div class="simulation-selection">
           <div class="simulation-form">
-            <div class="simulation-input">
-              <div class="tag-input">
-                <h3 style="width: 50%; text-align: left;">
-                  输入标签：
-                </h3>
-                <el-input v-model="tagValue" style="width: 50%;" placeholder="请输入标签"> </el-input>
-              </div>
-              <div class="section-input">
-                <h3 style="width: 50%; text-align: left;">
-                  输入模拟路段：
-                </h3>
-                <el-select v-model="sectionValue" style="width: 50%;" placeholder="请输入模拟路段名">
-                  <el-option v-for="item in sections" :key="item" :label="item" :value="item" />
-                </el-select>
-              </div>
+            <div style="display: flex; width: 80%; margin-bottom: 10px;">
+              <h3 style="white-space: nowrap; display: flex; align-items: center;">模拟起始路段：</h3>
+              <el-select v-model="sectionValue" placeholder="请选择模拟路段" style="width: 100%;">
+                <el-option v-for="o in sections" :key="o" :label="o" :value="o"></el-option>
+              </el-select>
             </div>
-            <div class="simulation-tag">
-              <!-- 展示所有标签 -->
-              <div style="width: 90%; height: 80%; display: flex; flex-direction: row;">
-                <TagComponent v-for="o in tagTemp" :key="o" :value="o" />
-              </div>
+            <div style="display: flex; width: 80%;">
+              <h3 style="white-space: nowrap; display: flex; align-items: center;">模拟终点路段：</h3>
+              <el-select v-model="sectionValue" placeholder="请选择模拟路段" style="width: 100%;">
+                <el-option v-for="o in sections" :key="o" :label="o" :value="o"></el-option>
+              </el-select>
             </div>
           </div>
           <div class="simulation-button">
-            <el-button type="primary" @click="addTag">添加</el-button>
-            <el-button type="primary" @click="simulate">模拟</el-button>
-            <el-button type="info" @click="reset">重置</el-button>
+            <el-button type="info">
+              重置
+            </el-button>
+            <el-button type="primary">
+              模拟
+            </el-button>
           </div>
         </div>
-        <div class="simulation-data">
-          <div class="simulation-chart">
-            <div class="changing-trends">
-              <v-chart :option="option"></v-chart>
-            </div>
-            <div class="pressure-analysis">
-              <h2 style="font-weight: 500; margin-bottom: 20px;">模拟路段交通压力分析</h2>
-              <ul>
-                <li v-for="o in simulationData" :key="o.name" style="display: flex; line-height: 2;">
-                  <div style="width: 50%;">
-                    <div style="width: 60%; text-align: right; white-space: nowrap;">
-                      {{ o.name }}
-                    </div>
-                  </div>
-                  <div style="width: 50%;">
-                    <div style="width: 80%; white-space: nowrap;">
-                      {{ o.value }}
-                    </div>
-                  </div>
-                </li>
-              </ul>
-            </div>
-          </div>
-          <div class="section-simulation">
-            <h2 style="font-weight: 500; margin: 15px 0 10px; line-height: normal;">路段模拟热力图</h2>
-            <div id="simulation-map" style="flex: 1; width: 100%;"></div>
-          </div>
+        <v-chart :option="option" style="height: 40%;"></v-chart>
+        <div class="pressure-analysis">
+          <h2 style="font-weight: 500; margin-bottom: 20px;">模拟路段交通压力分析</h2>
+          <ul>
+            <li v-for="o in simulationData" :key="o.name" style="display: flex; line-height: 2;">
+              <div style="width: 50%;">
+                <div style="width: 60%; text-align: right; white-space: nowrap;">
+                  {{ o.name }}
+                </div>
+              </div>
+              <div style="width: 50%;">
+                <div style="width: 80%; white-space: nowrap;">
+                  {{ o.value }}
+                </div>
+              </div>
+            </li>
+          </ul>
         </div>
+      </div>
+      <div class="middle">
+        <div id="simulation-map" style="width: 100%; height: 100%;"></div>
       </div>
       <div class="right">
         <div class="simulation-history">
@@ -281,7 +267,12 @@ const reset = () => {
 }
 
 .left {
-  width: 70%;
+  width: 25%;
+  height: 100%;
+}
+
+.middle {
+  width: 45%;
   height: 100%;
 }
 
@@ -305,8 +296,11 @@ const reset = () => {
   margin-left: 15px;
   border: 2px solid #049dc3;
   border-radius: 5px;
-  background-color: #0e989d;
-  display: inline-flex;
+  background-color: #387d7f;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 .simulation-input {
@@ -332,7 +326,7 @@ const reset = () => {
 
 .simulation-button {
   display: flex;
-  width: 10%;
+  /* width: 10%; */
   padding: 0 15px;
   flex-direction: column;
 }
