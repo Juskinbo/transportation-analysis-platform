@@ -136,16 +136,17 @@ const addTag = () => {
 }
 
 const simulate = () => {
-  simulationItems.value.push({
-    index: simulationItems.value.length + 1,
-    time: tagTemp.value[0],
-    type: sectionValue.value + " " + tagTemp.value[1] + " " + tagTemp.value[2]
-  })
-  count.value += 1
-  // tagTemp 清空
-  tagTemp.value = []
-  sectionValue.value = ""
-  console.log(tagTemp.value)
+  // simulationItems.value.push({
+  //   index: simulationItems.value.length + 1,
+  //   time: tagTemp.value[0],
+  //   type: sectionValue.value + " " + tagTemp.value[1] + " " + tagTemp.value[2]
+  // })
+  // count.value += 1
+  // // tagTemp 清空
+  // tagTemp.value = []
+  // sectionValue.value = ""
+  // console.log(tagTemp.value)
+  count.value++
 }
 const reset = () => {
   tags.splice(0, tags.length)
@@ -188,7 +189,7 @@ const changeItem = () => {
             <el-button type="info">
               重置
             </el-button>
-            <el-button type="primary">
+            <el-button type="primary" @click="simulate">
               模拟
             </el-button>
           </div>
