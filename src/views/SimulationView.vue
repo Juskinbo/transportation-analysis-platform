@@ -10,6 +10,7 @@ onMounted(() => {
   map.addTileLayer(traffic);                    // 将图层添加到地图上
 });
 const count = ref(0)
+const testData = reactive([3, 2, 1.5, 2.5, 4, 5, 4, 3.5, 4, 5, 4, 3.5])
 const sectionValue = ref("");
 const simulationData = ref([{
   name: "在途辆：",
@@ -75,7 +76,7 @@ const option = ref({
     {
       type: 'line',
       smooth: true,
-      data: [3, 2, 1.5, 2.5, 4, 5, 4, 3.5, 4, 5, 4, 3.5],
+      data: testData,
       color: "red",
     },
   ],
@@ -151,6 +152,15 @@ const reset = () => {
   tagValue.value = ""
   sectionValue.value = ""
 }
+const changeItem = () => {
+  option.value.series[0].data = testData.map(o => o * Math.random())
+  simulationData.value[0].value = Math.floor(Math.random() * 100000) + "辆"
+  simulationData.value[1].value = Math.floor(Math.random() * 100000) + "辆"
+  simulationData.value[2].value = Math.floor(Math.random() * 1000) + "辆/分钟"
+  simulationData.value[3].value = "少于正常时间" + Math.floor(Math.random() * 10) + "分钟"
+  simulationData.value[4].value = Math.floor(Math.random() * 10) + ".5"
+  simulationData.value[5].value = Math.floor(Math.random() * 100) + "分钟"
+}
 </script>
 <template>
   <header>
@@ -158,7 +168,7 @@ const reset = () => {
   </header>
   <div style="height: 83vh; display: flex; justify-content: center;">
     <div class="simulation-info">
-      <div class=left>
+      <div class="left">
         <div class="simulation-selection">
           <div class="simulation-form">
             <div style="display: flex; width: 80%; margin-bottom: 10px;">
@@ -215,7 +225,7 @@ const reset = () => {
             <div class="simulation-list">
               <el-scrollbar>
                 <ul style="line-height: 1.3; overflow: hidden;">
-                  <li v-for="o in tempItems" :key="o.index" style="margin-top: 10px;">
+                  <li v-for="o in tempItems" :key="o.index" style="margin-top: 10px;" @click="changeItem">
                     <!-- <p>{{ o. }}</p> -->
                     <p style="white-space: pre-wrap;">{{ o.value }}</p>
                   </li>
@@ -438,5 +448,3 @@ const reset = () => {
   margin-top: 10px;
 }
 </style>
-
-<style></style>

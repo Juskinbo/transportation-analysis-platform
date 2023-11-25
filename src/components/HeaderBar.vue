@@ -21,7 +21,7 @@ onMounted(() => {
   // 判断路由
   if (route.path === "/") {
     backgroundImage.value = `url(${homeBackground})`;
-    leftButton.value = "路段热力图"
+    leftButton.value = "路段详情"
     leftButton.link = "/heatmap"
     rightButton.value = "路段模拟"
     rightButton.link = "/simulation"
@@ -30,7 +30,7 @@ onMounted(() => {
     backgroundImage.value = `url(${SimulationBackground})`;
     leftButton.value = "智慧交通"
     leftButton.link = "/"
-    rightButton.value = "路段热力图"
+    rightButton.value = "路段详情"
     rightButton.link = "/heatmap"
   }
   else if (route.path === "/heatmap") {
