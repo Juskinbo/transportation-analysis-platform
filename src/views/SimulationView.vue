@@ -9,27 +9,30 @@ onMounted(() => {
   var traffic = new BMap.TrafficLayer();        // 创建交通流量图层实例      
   map.addTileLayer(traffic);                    // 将图层添加到地图上
 });
+const show = ref(false)
 const count = ref(0)
-const testData = reactive([3, 2, 1.5, 2.5, 4, 5, 4, 3.5, 4, 5, 4, 3.5])
-const sectionValue = ref("");
+//3, 2, 1.5, 2.5, 4, 5, 4, 3.5, 4, 5, 4, 3.5
+const testData = reactive([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0])
+const sectionValue1 = ref("");
+const sectionValue2 = ref("");
 const simulationData = ref([{
   name: "在途辆：",
-  value: '79992辆',
+  value: '——',
 }, {
   name: "道路承载力：",
-  value: '90000辆'
+  value: '——'
 }, {
   name: "平均流量：",
-  value: '500辆/分钟',
+  value: '——',
 }, {
   name: "出行时间：",
-  value: '少于正常时间3分钟',
+  value: '——',
 }, {
   name: "拥堵指数：",
-  value: '8.5',
+  value: '——',
 }, {
   name: "拥堵时长：",
-  value: '30分钟',
+  value: '——',
 }])
 const tagValue = ref("");
 const sections = ["留祥路", "石祥路", "石桥路", "秋涛路", "复兴路", "老复兴路", "虎跑路", "满觉陇路", "五老峰隧道", "吉庆山隧道", "梅灵北路", "九里松隧道", "灵溪南路", "灵溪隧道", "西溪路", "紫金港路", "文一西路", "古墩路"]
@@ -87,16 +90,7 @@ const option = ref({
   }
 });
 
-const tempItems = reactive([{
-  index: 1,
-  value: "限行时间：\n    城高速公路内所有高架路、快速路 (含匝道以及附属桥梁、隧道)的错峰时段为工作日的7:00一10:00和16:00-19:00限行路段：    “非浙A号牌”小客车错峰出行的高架路、快速路，具体包括彩虹快速路、之江大桥、紫之隧道紫金港路隧道、紫金港路南隧道、留石高架路、东湖快速路、九堡大桥、通城高架路、时代高架、中河高架路、上塘高架路、秋石高架路、西兴大桥复兴大桥、钱塘快速路、德胜快速路、文一路隧道等\n限行规则：\n    错峰时段内实行全号段禁止通行"
-}, {
-  index: 3,
-  value: "限行时间：\n    城高速公路内所有高架路、快速路 (含匝道以及附属桥梁、隧道)的错峰时段为工作日的7:00一10:00和16:00-19:00限行路段：    “非浙A号牌”小客车错峰出行的高架路、快速路，具体包括彩虹快速路、之江大桥、紫之隧道紫金港路隧道、紫金港路南隧道、留石高架路、东湖快速路、九堡大桥、通城高架路、时代高架、中河高架路、上塘高架路、秋石高架路、西兴大桥复兴大桥、钱塘快速路、德胜快速路、文一路隧道等\n限行规则：\n    错峰时段内实行全号段禁止通行"
-}, {
-  index: 2,
-  value: "限行时间：\n    城高速公路内所有高架路、快速路 (含匝道以及附属桥梁、隧道)的错峰时段为工作日的7:00一10:00和16:00-19:00限行路段：    “非浙A号牌”小客车错峰出行的高架路、快速路，具体包括彩虹快速路、之江大桥、紫之隧道紫金港路隧道、紫金港路南隧道、留石高架路、东湖快速路、九堡大桥、通城高架路、时代高架、中河高架路、上塘高架路、秋石高架路、西兴大桥复兴大桥、钱塘快速路、德胜快速路、文一路隧道等\n限行规则：\n    错峰时段内实行全号段禁止通行"
-},])
+const tempItems = reactive([])
 const simulationItems = ref([])
 const schemeTitles = ref(["", "限行时段", "限行规则", "限行范围"])
 const tags = reactive([])
@@ -147,6 +141,10 @@ const simulate = () => {
   // sectionValue.value = ""
   // console.log(tagTemp.value)
   count.value++
+  tempItems.push({
+    index: tempItems.length + 1,
+    value: "限行时间：\n    城高速公路内所有高架路、快速路 (含匝道以及附属桥梁、隧道)的错峰时段为工作日的7:00一10:00和16:00-19:00限行路段：    “非浙A号牌”小客车错峰出行的高架路、快速路，具体包括彩虹快速路、之江大桥、紫之隧道紫金港路隧道、紫金港路南隧道、留石高架路、东湖快速路、九堡大桥、通城高架路、时代高架、中河高架路、上塘高架路、秋石高架路、西兴大桥复兴大桥、钱塘快速路、德胜快速路、文一路隧道等\n限行规则：\n    错峰时段内实行全号段禁止通行"
+  })
 }
 const reset = () => {
   tags.splice(0, tags.length)
@@ -154,13 +152,17 @@ const reset = () => {
   sectionValue.value = ""
 }
 const changeItem = () => {
-  option.value.series[0].data = testData.map(o => o * Math.random())
+  option.value.series[0].data = testData.map(o => (o + 1) * Math.random())
   simulationData.value[0].value = Math.floor(Math.random() * 100000) + "辆"
   simulationData.value[1].value = Math.floor(Math.random() * 100000) + "辆"
   simulationData.value[2].value = Math.floor(Math.random() * 1000) + "辆/分钟"
   simulationData.value[3].value = "少于正常时间" + Math.floor(Math.random() * 10) + "分钟"
   simulationData.value[4].value = Math.floor(Math.random() * 10) + ".5"
   simulationData.value[5].value = Math.floor(Math.random() * 100) + "分钟"
+}
+
+const generateScheme = () => {
+  show.value = true
 }
 </script>
 <template>
@@ -174,13 +176,13 @@ const changeItem = () => {
           <div class="simulation-form">
             <div style="display: flex; width: 80%; margin-bottom: 10px;">
               <h3 style="white-space: nowrap; display: flex; align-items: center;">模拟起始路段：</h3>
-              <el-select v-model="sectionValue" placeholder="请选择模拟路段" style="width: 100%;">
+              <el-select v-model="sectionValue1" placeholder="请选择模拟路段" style="width: 100%;">
                 <el-option v-for="o in sections" :key="o" :label="o" :value="o"></el-option>
               </el-select>
             </div>
             <div style="display: flex; width: 80%;">
               <h3 style="white-space: nowrap; display: flex; align-items: center;">模拟终点路段：</h3>
-              <el-select v-model="sectionValue" placeholder="请选择模拟路段" style="width: 100%;">
+              <el-select v-model="sectionValue2" placeholder="请选择模拟路段" style="width: 100%;">
                 <el-option v-for="o in sections" :key="o" :label="o" :value="o"></el-option>
               </el-select>
             </div>
@@ -234,7 +236,8 @@ const changeItem = () => {
               </el-scrollbar>
             </div>
             <div class="scheme-generation">
-              <el-button text style="width: 40%; color: white; background: linear-gradient(to bottom, #fd333e, #762429);">
+              <el-button text @click="generateScheme"
+                style="width: 40%; color: white; background: linear-gradient(to bottom, #fd333e, #762429);">
                 方案生成
               </el-button>
             </div>
@@ -242,7 +245,7 @@ const changeItem = () => {
         </div>
         <div class="restriction-scheme">
           <div style="background: linear-gradient(to bottom, #fc333d, #762528); width: 100%;">限行方案</div>
-          <div style="display: grid; font-size: 12px; width: 90%;">
+          <div style="display: grid; font-size: 12px; width: 90%;" v-show="show">
             <div style="display: grid; grid-template-columns: repeat(4, 1fr); margin: 10px 0;">
               <div v-for="o, index in schemeTitles" :key="index">{{ o }}</div>
             </div>

@@ -19,38 +19,33 @@ onMounted(() => {
   var traffic1 = new BMap.TrafficLayer();
   map.addTileLayer(traffic1);
 })
-const warning = [
+const warning = ref([
   {
-    id: 1,
     title: '恶劣天气：泥石流',
-    content: '北侧交通路口',
-    time: '2023-10-12 16:25:32',
+    content: '江南大道',
+    time: '2023-11-25 16:21:04',
   },
   {
-    id: 2,
+    title: '恶劣天气：强降雨',
+    content: '德胜快速路',
+    time: '2023-11-25 16:21:04',
+  },
+  {
+    title: '恶劣天气：强降雨',
+    content: '九堡大桥',
+    time: '2023-11-25 13:25:32',
+  },
+  {
     title: '重大事件：省人大召开',
-    content: '北侧交通路口',
-    time: '2023-10-12 16:25:32',
+    content: '省府路',
+    time: '2023-11-25 10:09:19',
   },
   {
-    id: 3,
-    title: '恶劣天气：泥石流',
-    content: '北侧交通路口',
-    time: '2023-10-12 16:25:32',
+    title: '恶劣天气：大风',
+    content: '通城高架路',
+    time: '2023-11-25 09:25:41',
   },
-  {
-    id: 4,
-    title: '重大事件：省人大召开',
-    content: '北侧交通路口',
-    time: '2023-10-12 16:25:32',
-  },
-  {
-    id: 5,
-    title: '恶劣天气：泥石流',
-    content: '北侧交通路口',
-    time: '2023-10-12 16:25:32',
-  },
-]
+])
 const locations = ['留祥路', '石祥路', '石桥路', '秋涛路', '复兴路']
 const option = ref({
   title: {
@@ -138,6 +133,16 @@ const search = () => {
     }
   })
 }
+
+// 定时任务，十秒钟之后添加一个新的数据到 warning 头部
+setTimeout(() => {
+  warning.value.unshift({
+    title: '恶劣天气：大风',
+    content: '留石高架路',
+    time: '2023-11-25 17:23:41',
+  })
+  warning.value.pop()
+}, 10000)
 </script>
 <template>
   <header>
