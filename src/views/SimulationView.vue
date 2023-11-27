@@ -1,17 +1,16 @@
 <script setup>
 import { onMounted, reactive, ref } from 'vue'
 import HeaderBar from '../components/HeaderBar.vue'
-import TagComponent from '../components/TagComponent.vue';
+// import TagComponent from '../components/TagComponent.vue'
 onMounted(() => {
-  var map = new BMap.Map("simulation-map");
-  map.enableScrollWheelZoom(true);
-  map.centerAndZoom(new BMap.Point(120.171387, 30.249298), 13);
-  var traffic = new BMap.TrafficLayer();        // 创建交通流量图层实例      
-  map.addTileLayer(traffic);                    // 将图层添加到地图上
+  var map = new BMap.Map("simulation-map")
+  map.enableScrollWheelZoom(true)
+  map.centerAndZoom(new BMap.Point(120.171387, 30.249298), 13)
+  var traffic = new BMap.TrafficLayer()        // 创建交通流量图层实例      
+  map.addTileLayer(traffic)                    // 将图层添加到地图上
 });
 const show = ref(false)
 const count = ref(0)
-//3, 2, 1.5, 2.5, 4, 5, 4, 3.5, 4, 5, 4, 3.5
 const testData = reactive([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0])
 const sectionValue1 = ref("");
 const sectionValue2 = ref("");
@@ -91,43 +90,43 @@ const option = ref({
 });
 
 const tempItems = reactive([])
-const simulationItems = ref([])
+// const simulationItems = ref([])
 const schemeTitles = ref(["", "限行时段", "限行规则", "限行范围"])
 const tags = reactive([])
-const tagTemp = ref([])
+// const tagTemp = ref([])
 
-const addTag = () => {
-  if (tagValue.value === "") {
-    alert("请输入标签")
-    return
-  }
-  if (sectionValue.value === "") {
-    alert("请输入模拟路段")
-    return
-  }
-  // 然后判断一下sectionValue.value是否已经存在
-  if (tags.some(o => o.section === sectionValue.value)) {
-    // 找到这条记录然后在tag里面添加
-    const index = tags.findIndex(o => o.section === sectionValue.value)
-    tags[index].tag.push(tagValue.value)
-    console.log(111)
-  }
-  else {
-    tags.push({
-      section: sectionValue.value,
-      tag: [tagValue.value]
-    })
-  }
-  // 遍历tags
-  tags.forEach(o => {
-    if (o.section === sectionValue.value) {
-      tagTemp.value = o.tag
-    }
-  })
-  console.log(tags)
-  console.log(tagTemp.value)
-  tagValue.value = ""
-}
+// const addTag = () => {
+//   if (tagValue.value === "") {
+//     alert("请输入标签")
+//     return
+//   }
+//   if (sectionValue.value === "") {
+//     alert("请输入模拟路段")
+//     return
+//   }
+//   // 然后判断一下sectionValue.value是否已经存在
+//   if (tags.some(o => o.section === sectionValue.value)) {
+//     // 找到这条记录然后在tag里面添加
+//     const index = tags.findIndex(o => o.section === sectionValue.value)
+//     tags[index].tag.push(tagValue.value)
+//     console.log(111)
+//   }
+//   else {
+//     tags.push({
+//       section: sectionValue.value,
+//       tag: [tagValue.value]
+//     })
+//   }
+//   // 遍历tags
+//   tags.forEach(o => {
+//     if (o.section === sectionValue.value) {
+//       tagTemp.value = o.tag
+//     }
+//   })
+//   console.log(tags)
+//   console.log(tagTemp.value)
+//   tagValue.value = ""
+// }
 
 const simulate = () => {
   // simulationItems.value.push({
@@ -146,11 +145,11 @@ const simulate = () => {
     value: "限行时间：\n    城高速公路内所有高架路、快速路 (含匝道以及附属桥梁、隧道)的错峰时段为工作日的7:00一10:00和16:00-19:00限行路段：    “非浙A号牌”小客车错峰出行的高架路、快速路，具体包括彩虹快速路、之江大桥、紫之隧道紫金港路隧道、紫金港路南隧道、留石高架路、东湖快速路、九堡大桥、通城高架路、时代高架、中河高架路、上塘高架路、秋石高架路、西兴大桥复兴大桥、钱塘快速路、德胜快速路、文一路隧道等\n限行规则：\n    错峰时段内实行全号段禁止通行"
   })
 }
-const reset = () => {
-  tags.splice(0, tags.length)
-  tagValue.value = ""
-  sectionValue.value = ""
-}
+// const reset = () => {
+//   tags.splice(0, tags.length)
+//   tagValue.value = ""
+//   sectionValue.value = ""
+// }
 const changeItem = () => {
   option.value.series[0].data = testData.map(o => (o + 1) * Math.random())
   simulationData.value[0].value = Math.floor(Math.random() * 100000) + "辆"

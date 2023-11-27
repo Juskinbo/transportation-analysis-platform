@@ -3,8 +3,8 @@ import 'echarts/extension/bmap/bmap'
 // import data from '@/assets/hangzhou-tracks.json'
 import HeaderBar from '../components/HeaderBar.vue'
 import { ref, onMounted } from 'vue'
-import { useRoute, useRouter } from 'vue-router'
-const route = useRoute()
+import { useRouter } from 'vue-router'
+// const route = useRoute()
 const router = useRouter()
 var map
 onMounted(() => {
